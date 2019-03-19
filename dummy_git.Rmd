@@ -1,0 +1,71 @@
+---
+title: "My dummy doc"
+author: "IL"
+date: "19 March, 2019"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## GitHub Documents
+My dummy markdown
+
+
+```{r cars}
+suppressMessages({
+library(readr)
+library(dplyr)
+library(data.table) 
+library(reshape2)
+library(lubridate)
+library(ggplot2)
+library(stringr)
+library(formattable)
+library(kableExtra)
+library(tidyverse)
+})
+```
+
+## my colour pallete
+
+```{r}
+my_palette = c("#003d9a",
+               "#00d1c6",
+               "#0068ff", 
+               "#71a9ff",
+               "#87fff9",
+               "#99c3ff",
+               "#bfbfbf")
+```
+
+```{r}
+win_brow<- read.csv("C:/Users/Izabella.Lubowiecka/Downloads/winning_browsers.csv" )
+```
+My beatiful graph
+
+```{r pressure, echo=FALSE}
+ggplot(win_brow, aes(x="", y=conversions, fill=reorder(BrowserType, -conversions))) + 
+  geom_bar(stat="identity", width=1)+
+  coord_polar("y", start=0) + 
+  geom_text(aes(label = if_else(win_brow$perc > 0.09,paste0(conversions,"\n(",round(perc*100), "%)"),"")), 
+            position = position_stack(vjust = 0.5),
+            size=10,
+            color ="white")+
+   scale_fill_manual(values = my_palette)+
+  labs(x = NULL, y = NULL, fill = NULL )+
+  theme_classic() + 
+  theme(axis.line = element_blank(),
+        axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        plot.title = element_text(hjust = 0.5, color = "#666666"),
+        legend.direction  = "horizontal",
+        #legend.position="bottom",
+        legend.position=c(0.5,0.05),
+        legend.text = element_text(size= 30, color = "black"),
+        panel.background = element_rect(fill="#ffffff"),
+        legend.background = element_rect(fill="#ffffff"))
+```
+
+
